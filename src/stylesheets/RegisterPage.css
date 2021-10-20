@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   display: flex;
   width: 100%;
   height: 100vh;
@@ -8,10 +8,10 @@
   background-image: -webkit-linear-gradient(top, #654a86, #534292);
 }
 /* #6762a6 */
-.login-container .login-window {
+.register-container .register-window {
   display: flex;
   width: 500px;
-  height: 500px;
+  height: 600px;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -21,13 +21,13 @@
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.25);
 }
 
-.login-container .login-window p {
+.register-container .register-window p {
   font-size: 26px;
   padding-bottom: 20px;
   color: #654a86;
 }
 
-.login-inputs {
+.register-inputs {
   width: 75%;
   font-size: large;
   display: flex;
@@ -37,7 +37,7 @@
   padding-bottom: 20px;
 }
 
-.login-inputs span {
+.register-inputs span {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -49,7 +49,7 @@
   padding: 6px;
 }
 
-.login-inputs input {
+.register-inputs input {
   font-size: large;
   margin-left: 6px;
   width: 100%;
@@ -58,17 +58,18 @@
   outline: none;
 }
 
-.login-inputs button {
+.register-inputs button {
+  margin-top: 20px;
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.login-buttons span {
+.register-buttons span {
   font-size: medium;
 }
 
-.login-buttons span:hover {
+.register-buttons span:hover {
   text-decoration: underline;
   cursor: pointer;
 }
