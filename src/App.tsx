@@ -1,17 +1,17 @@
 
 import './stylesheets/App.css';
-import Post from './components/Post';
+import Posts from './components/Posts';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useState } from 'react';
+import Header from './components/Header';
 
 const App =()  =>{
-  const [authors, setAuthors ]= useState([{name: "Hero 1"},{name: "Hero 2"},{name: "Hero 3"}])
 
   // client = https://protected-bastion-58031.herokuapp.com/
   return (
     <div>
+      <Header />
       <Router>
         <Switch>
           <Route path="/login">
@@ -21,7 +21,7 @@ const App =()  =>{
             <RegisterPage />
           </Route>
           <Route path="/">
-            <Post title="Post 1" body="body 1" author={authors[0]}/>
+            <Posts />
           </Route>
         </Switch>
       </Router>
