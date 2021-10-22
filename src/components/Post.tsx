@@ -23,6 +23,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id}) => {
     </div>
     <div className="post-body">
       <p>{body}</p>
+      <button>read more</button>
     </div>
     
     {/* <CommentBox /> */}

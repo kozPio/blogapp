@@ -5,13 +5,14 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header';
+import Sidebar from './components/SideBar';
 
 const App =()  =>{
 
   // client = https://protected-bastion-58031.herokuapp.com/
   return (
     <div>
-      <Header />
+      
       <Router>
         <Switch>
           <Route path="/login">
@@ -21,7 +22,14 @@ const App =()  =>{
             <RegisterPage />
           </Route>
           <Route path="/">
-            <Posts />
+            <div className="app-container">
+              <Sidebar /> 
+              <div className="app-body">
+                <Header />
+                <Posts />
+              </div>
+              
+            </div>
           </Route>
         </Switch>
       </Router>

@@ -1,15 +1,72 @@
 .header {
-  height: 5vh;
+  height: 7vh;
   top: 0;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  position: sticky;
+  z-index: 10;
+  border-bottom: 1px solid #a99888;
 }
 
 .header-sign {
   display: flex;
   justify-content: space-between;
-  width: 100px;
+  margin-right: 40px;
+  color: #a99888;
+  font-weight: bold;
+}
+
+.header-sign-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin: 0 15px;
+  border-radius: 30px;
+  background-color: #e2dbd3;
+  padding: 5px 10px;
+  border: 1px solid #a99888;
+  cursor: pointer;
+}
+
+.header-sign-button p {
+  margin-left: 5px;
+}
+
+.header-sign-button:hover {
+  text-decoration: underline;
+}
+
+.header-magnifyingGlass {
+  font-size: large;
+  margin-left: 10px;
+}
+
+.header-search {
+  min-width: 450px;
+  height: 4vh;
+  border-radius: 24px;
+  border: 1px solid #a99888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.header-search input {
+  outline: none;
+  font-size: large;
+  padding: 5px;
+  width: 100%;
+  border-radius: 24px;
+  border: none;
+  background-color: inherit;
+}
+
+.header-logo-search {
+  display: flex;
+  align-items: center;
 }
