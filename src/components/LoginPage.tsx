@@ -69,15 +69,10 @@ interface LoginData {
       <div className="login-window" >
         <p>Log in to your account</p>
         <div className="login-inputs">
-          {/* <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" /> */}
           <label htmlFor="email">email</label>
           <span><FontAwesomeIcon icon={faUser} color="#654a86" /><input value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email adress" type="text" name="email" id="email" /></span>
           <label htmlFor="passsword">password</label>
           <span><FontAwesomeIcon icon={faKey} color="#654a86" /><input value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Password" type="password" name="password" id="password" /></span>
-          
-          {/* <label htmlFor="repeatPassword">Reapet Password</label>
-          <input type="text" name="repeatPassword" id="repeatPassword" /> */}
           <button className="button is-primary is-medium" onClick={() => email && password && login()}>Log In</button>
           
           

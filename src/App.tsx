@@ -21,6 +21,16 @@ const App =()  =>{
           <Route path="/register">
             <RegisterPage />
           </Route>
+          <Route path="/myposts">
+            <div className="app-container">
+              <Sidebar /> 
+              <div className="app-body">
+                <Header />
+                <Posts />
+              </div>
+              
+            </div>
+          </Route>
           <Route path="/">
             <div className="app-container">
               <Sidebar /> 

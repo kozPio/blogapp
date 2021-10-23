@@ -2,7 +2,7 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  min-width: 500px;
+  min-width: 1000px;
   max-width: 1000px;
   min-height: 100px;
   border-radius: 8px;
@@ -18,7 +18,7 @@
   border-top-left-radius: 8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #e2dbd3;
   font-size: 20px;
   padding: 5px;
@@ -48,6 +48,26 @@
   font-weight: 400;
   color: #a99888;
   font-weight: bold;
+}
+
+.post-edit {
+  display: flex;
+  justify-content: center;
+}
+
+.post-edit p {
+  margin-right: 8px;
+}
+
+.post-edit-icons svg {
+  margin: 0 8px;
+  padding: 5px;
+}
+
+.post-edit-icons svg:hover {
+  border-radius: 6px;
+  outline: 1px solid #a99888;
+  cursor: pointer;
 }
 
 /* #a595df

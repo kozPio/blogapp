@@ -9,16 +9,22 @@
   z-index: 16;
 }
 
-.sidebar p {
+.sidebar .sidebar-option {
   padding: 10px;
-  font-size: 24px;
+  font-size: 20px;
   color: #a99888;
   font-weight: bold;
   border-radius: 30px;
-  margin: 15px 0 15px 10px;
+  margin: 15px 15px 15px 10px;
+  cursor: pointer;
+}
+.sidebar-reveal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.sidebar p:hover {
+.sidebar .sidebar-option:hover {
   outline: 1px solid #a99888;
 }
 
@@ -29,4 +35,18 @@
   filter: sepia(0.8);
   border-radius: 33px;
   margin-left: 10px;
+}
+
+.sidebar-show {
+  padding: 10px;
+  font-size: 18px;
+  color: #a99888;
+  font-weight: bold;
+  border-radius: 30px;
+  margin: 0 15px 15px 10px;
+  cursor: pointer;
+}
+
+.sidebar-show:hover {
+  outline: 1px solid #a99888;
 }

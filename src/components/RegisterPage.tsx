@@ -1,12 +1,16 @@
 import "../stylesheets/RegisterPage.css";
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
  const RegisterPage:React.FC = ()=> {
 
+  const history = useHistory();
   
   const register = () => {
+
     console.log("registered")
+    history.push('/');
   }
 
 
