@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX , faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {useMutation, gql} from "@apollo/client";
 import { useState } from 'react';
-import Modal from './Modal';
+import ModalUpdatePost from './ModalUpdatePost';
+import { Link } from 'react-router-dom';
+import truncate from '../utils/turncate';
+import convertDate from '../utils/convertDate';
 
 
 interface PostProps {
@@ -15,7 +18,8 @@ interface PostProps {
   };
   id: string;
   user: boolean;
-  published: boolean
+  published: boolean;
+  updatedAt: string
 }
 
 
@@ -47,7 +51,7 @@ interface ModuleProps {
   [key: string]: string;
 }
 
-const Post: React.FC<PostProps> = ({title, body, author, id, user, published}) => {
+const Post: React.FC<PostProps> = ({title, body, author, id, user, published, updatedAt}) => {
 
   const [openModal, setOpenModal]= useState(false);
   const [modalContent, setModalContent]=useState<ModalProps>({id, title, body, published});
@@ -70,17 +74,25 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published}) =
       <p>{author.name}</p>
       <p>{title}</p>
       <div className="post-edit">
-        <p>2010-20-10</p>
+        <p>{convertDate(updatedAt)[0]} {convertDate(updatedAt)[1]}</p>
         {user ? <div className="post-edit-icons"> <FontAwesomeIcon onClick={()=> deletePost()} icon={faX} color="#FF6666"/> <FontAwesomeIcon onClick={()=> toggleModdal()} icon={faPenToSquare} color="#ffff9f"/> </div>: null }
       </div>
       
       
     </div>
     <div className="post-body">
-      <p>{body}</p>
-      <button>read more</button>
+      <p>{truncate(body)}</p>
+      <Link className="post-body-read-more" to={{
+            pathname: "/post",
+            state: {
+              id
+            }
+          }}>
+        <button>read more</button>
+      </Link>
+      
     </div>
-    {openModal && <Modal modalContent={modalContent} show={openModal} toggleModal={(modal: boolean)=> setOpenModal(modal)} />}
+    {openModal && <ModalUpdatePost modalContent={modalContent} show={openModal} toggleModal={(modal: boolean)=> setOpenModal(modal)} />}
     {/* <CommentBox /> */}
   </div>
 

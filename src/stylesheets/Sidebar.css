@@ -1,6 +1,5 @@
 .sidebar {
-  height: 100%;
-  /* background-color: #a595df ; */
+  height: 100vh;
   background-image: url('https://webstatic-sea.mihoyo.com/upload/event/2021/09/24/a68116a9450eddda7cbd975eac645862_9052321077943725352.png');
   background-color: transparent;
   display: flex;

@@ -5,26 +5,27 @@
   /* background-color: #654a86; */
   justify-content: center;
   align-items: center;
-  background-image: -webkit-linear-gradient(top, #654a86, #534292);
+  background-color: #e2dbd3;
 }
 /* #6762a6 */
 .register-container .register-window {
   display: flex;
   width: 500px;
   height: 600px;
-  background-color: #fff;
-  border: 1px solid transparent;
+  background-color: #e2dbd3;
+  border: 2px solid #a99888;
   border-radius: 8px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 10px 5px 5px #a99888;
 }
 
 .register-container .register-window p {
   font-size: 26px;
   padding-bottom: 20px;
-  color: #654a86;
+  color: #a99888;
+  font-weight: bold;
 }
 
 .register-inputs {
@@ -35,6 +36,8 @@
   justify-content: center;
   align-items: flex-start;
   padding-bottom: 20px;
+  color: #a99888;
+  font-weight: bold;
 }
 
 .register-inputs span {
@@ -45,7 +48,7 @@
   width: 100%;
   margin-bottom: 10px;
   border-radius: 4px;
-  border: 1px solid black;
+  border: 1px solid #a99888;
   padding: 6px;
 }
 
@@ -56,6 +59,7 @@
   padding: 10px;
   border: none;
   outline: none;
+  background-color: #e2dbd3;
 }
 
 .register-inputs button {
@@ -65,11 +69,50 @@
   cursor: pointer;
 }
 
-.register-buttons span {
-  font-size: medium;
+.register-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
-.register-buttons span:hover {
+.register-buttons p {
+  font-size: 14px !important;
+  padding-bottom: 0 !important;
+  margin-right: 10px;
+  font-weight: 400 !important;
+}
+
+.register-button-link {
+  font-size: medium;
+  color: #a99888;
+  font-weight: bold;
+  border: none;
+}
+
+.register-button-link-home {
+  align-self: center;
+}
+
+.register-button-link:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.register-button {
+  background-color: #a99888;
+  color: #e2dbd3;
+}
+
+.register-button:hover {
+  background-color: #e2dbd3;
+  color: #a99888;
+  border: 2px solid #a99888;
+}
+
+.register-inputs-error {
+  font-size: small !important;
+  color: #ff6666 !important;
+  padding-bottom: 0 !important;
 }

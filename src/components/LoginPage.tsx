@@ -7,6 +7,8 @@ import {
   useMutation,
   gql
 } from "@apollo/client";
+import NotificationModal from './NotificationModal';
+import checkInputs from "../utils/checkInputs";
 
 
 const LOG_IN = gql`
@@ -24,9 +26,19 @@ interface LoginToken {
   token: string;
 }
 
+interface Log {
+  login: LoginToken;
+}
+
+
 interface LoginData {
   email: string;
   password: string;
+}
+
+interface ErrorProps {
+  email: boolean,
+  password: boolean
 }
   
 
@@ -34,34 +46,52 @@ interface LoginData {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [openModal, setOpenModal]= useState(false);
+  const [loginError, setLoginError]=useState<Error | null>(null);
+  const [inputErrors, setInputErrors] = useState<ErrorProps>({
+    email: false,
+    password: false
+  })
 
   const history = useHistory();
 
-  const [login, { error, data }] = useMutation<
+  const handleLogin = () => {
+    let result = checkInputs({password, email});
+    setInputErrors(result[1])
+    if(result[0]){
+      login();
+    }
+  }
+
+  
+
+  const [login, { data,error}] = useMutation<
     { login: LoginToken }, // sets what is returned from this mutation what props can I access on data after mutation (if those props exist)
     { data: LoginData } // Seting variable data to implement interface LoginData
   >(LOG_IN, {
-    variables: { data: { email, password } } // Variables are implementing interface of LOginData
+    variables: { data: { email, password }  },  onError: (err) => {
+      setLoginError(err);
+  }  // Variables are implementing interface of LOginData
   });
 
   useEffect(()=> {
+    console.log(data)
     if(data){
-      localStorage.setItem("token", data.login.token)
-      history.push('/')
+        localStorage.setItem("token", data.login.token)
+        history.push('/')
     }
   },[data])
 
 
-  
-
-  // const login = () => {
-  //   console.log(password)
-  //   console.log(email)
-  // }
-
   const register = () => {
     history.push('/register')
   }
+
+  const home = () => {
+    history.push('/');
+  }
+
+
 
 
    return (
@@ -70,19 +100,21 @@ interface LoginData {
         <p>Log in to your account</p>
         <div className="login-inputs">
           <label htmlFor="email">email</label>
-          <span><FontAwesomeIcon icon={faUser} color="#654a86" /><input value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email adress" type="text" name="email" id="email" /></span>
+          <span><FontAwesomeIcon icon={faUser} color="#a99888" /><input value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email adress" type="text" name="email" id="email" /></span>
+          {inputErrors.email && <p className="register-inputs-error">plese enter email correctly</p>}
           <label htmlFor="passsword">password</label>
-          <span><FontAwesomeIcon icon={faKey} color="#654a86" /><input value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Password" type="password" name="password" id="password" /></span>
-          <button className="button is-primary is-medium" onClick={() => email && password && login()}>Log In</button>
+          <span><FontAwesomeIcon icon={faKey} color="#a99888" /><input value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Password" type="password" name="password" id="password" /></span>
+          {inputErrors.password && <p className="register-inputs-error">password is less than 8 chars</p>}
+          <button className="button is-medium login-button" onClick={() => handleLogin()}>Log In</button>
           
           
         </div>
         <div className="login-buttons">
           <span onClick={()=>register()}>Register</span>
+          <span onClick={()=>home()}>Back to main page</span>
         </div>
-        
+        {loginError && <NotificationModal modalContent={loginError.message} toggleModal={(err: Error | null)=> setLoginError(err)}/>}
       </div>
-
     </div>)
  }
 

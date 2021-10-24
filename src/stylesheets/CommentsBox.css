@@ -1,37 +1,31 @@
-.posts-container {
-  position: relative;
+.comment-container {
   margin-top: 30px;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 100%;
+  font-size: large;
+  margin-bottom: 20px;
   align-items: center;
 }
 
-.posts-createPost {
-  width: 125px;
-  height: 40px;
+.comments-createComment {
+  width: 200px;
+  height: 50px;
   display: flex;
   border-radius: 30px;
   align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #e2dbd3;
   margin-bottom: 15px;
   color: #a99888;
+  font-size: 16px !important;
   font-weight: bold;
   cursor: pointer;
 }
 
-.posts-createPost:hover {
-  color: #e2dbd3;
-  background-color: #a99888;
-  outline: 1px solid #a99888;
-}
-
-.posts-createPost:hover .posts-plus {
-  color: #e2dbd3;
-}
-
-.posts-plus {
+.comments-plus {
   margin-right: 5px;
   font-size: medium;
 }

@@ -22,14 +22,21 @@ const Sidebar: React.FC = () => {
             }
           }}> 
         <img className="sidebar-logo" src="https://www.pikpng.com/pngl/m/2-24867_random-logo-png-transparent-random-brand-logos-png.png" alt="" />
+    </Link>
+    <Link to={{
+            pathname: "/",
+            state: {
+              user: false
+            }
+          }}> 
+        <div className="sidebar-option"><p>All Posts</p></div>
       </Link>
-    <div className="sidebar-option"><p>Recent Post</p></div>
     <div className="sidebar-option"><p>Hot Posts</p></div>
     <div className="sidebar-option"><p>Old Posts</p></div>
     <div className="sidebar-option"><p>Featured Posts</p></div>
-    <div className="sidebar-option sidebar-reveal" onClick={()=> reveal()}>
+    {token &&<div className="sidebar-option sidebar-reveal" onClick={()=> reveal()}>
       <p>Manage your uploads</p><FontAwesomeIcon icon={faArrowAltCircleDown} color="#a99888"/>
-    </div>
+    </div>}
       {show && <div>
           <Link to={{
             pathname: "/myposts",
@@ -42,6 +49,7 @@ const Sidebar: React.FC = () => {
           
           <p className="sidebar-show">Manage your comments</p>
         </div>}
+        
       
 
   </div>)

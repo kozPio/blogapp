@@ -6,6 +6,7 @@ import RegisterPage from './components/RegisterPage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header';
 import Sidebar from './components/SideBar';
+import SinglePost from './components/SinglePost';
 
 const App =()  =>{
 
@@ -27,6 +28,16 @@ const App =()  =>{
               <div className="app-body">
                 <Header />
                 <Posts />
+              </div>
+              
+            </div>
+          </Route>
+          <Route path="/post">
+            <div className="app-container">
+              <Sidebar /> 
+              <div className="app-body">
+                <Header />
+                <SinglePost />
               </div>
               
             </div>

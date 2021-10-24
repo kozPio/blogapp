@@ -1,16 +1,31 @@
 .post-container {
-  background-color: #fff;
+  background-color: #e2dbd3;
   display: flex;
   flex-direction: column;
   min-width: 1000px;
   max-width: 1000px;
-  min-height: 100px;
   border-radius: 8px;
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.25);
   margin-bottom: 20px;
   margin-left: 25px;
   margin-right: 25px;
   font-size: large;
+}
+.single-post-window {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+.single-post-container {
+  background-color: #e2dbd3;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+  max-width: 1000px;
+  border-radius: 8px;
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.25);
+  font-size: large;
+  margin-top: 30px;
 }
 
 .post-header {
@@ -31,13 +46,11 @@
   display: flex;
   flex-direction: column;
   background-color: #f0ece5;
-  flex-wrap: wrap;
 }
 .post-body button {
   min-width: 80px;
-  margin-left: auto;
-  margin-right: 10px;
   margin-bottom: 5px;
+  margin-top: 5px;
   background-color: #e2dbd3;
   font-size: medium;
   cursor: pointer;
@@ -48,6 +61,11 @@
   font-weight: 400;
   color: #a99888;
   font-weight: bold;
+}
+
+.post-body-read-more {
+  margin-left: auto;
+  margin-right: 10px;
 }
 
 .post-edit {

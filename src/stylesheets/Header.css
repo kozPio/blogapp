@@ -1,5 +1,6 @@
 .header {
   height: 7vh;
+  padding: 20px 0;
   top: 0;
   width: 100%;
   display: flex;
@@ -9,6 +10,8 @@
   position: sticky;
   z-index: 10;
   border-bottom: 1px solid #a99888;
+  background-image: url('https://webstatic-sea.mihoyo.com/upload/event/2021/09/24/f534b8060dac7b135df85c7df3c4b467_2591103253723835447.png');
+  background-color: transparent;
 }
 
 .header-sign {
@@ -34,6 +37,7 @@
 
 .header-sign-button p {
   margin-left: 5px;
+  color: #a99888;
 }
 
 .header-sign-button:hover {
