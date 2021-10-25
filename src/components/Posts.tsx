@@ -1,4 +1,4 @@
-import '../stylesheets/Posts.css'
+import '../stylesheets/Posts.scss'
 import {
   useQuery,
   gql
@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
 import { useLocation } from 'react-router';
 import Post from './Post';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import ModalCreatePost from './ModalCreatePost';
 import Loading from  '../utils/Loading';
 
 
+
+
 const POSTS = gql`
-    query {
-      posts {
+    query($first: Int $skip: Int) {
+      posts(first: $first skip: $skip orderBy: updatedAt_DESC) {
         id
         title
         body
@@ -29,8 +31,8 @@ const POSTS = gql`
 
 
   const MY_POSTS = gql`
-    query {
-      myPosts {
+    query ($first: Int $skip: Int) {
+      myPosts(first: $first skip: $skip orderBy: updatedAt_DESC) {
         id
         title
         body
@@ -43,23 +45,6 @@ const POSTS = gql`
     }
   `
 
-const GET_USERS = gql`
-    query {
-      users {
-        id
-        name
-      }
-    }
-    `
-
-interface UserProps {
-  name: string;
-  id: string
-}
-
-interface Users {
-  users: UserProps[];
-}
 
 
 interface PostProps {
@@ -94,6 +79,7 @@ const Posts: React.FC= () => {
   const [posts, setPosts]=useState(POSTS);
   const [user, setUser]=useState(location.state?.user || false)
   const [openModal, setOpenModal]= useState(false);
+  const [howMuchSkip, setHowMuchSkip]=useState(0)
 
 
   const toggleModdal = () => {
@@ -102,13 +88,13 @@ const Posts: React.FC= () => {
   
 
   useEffect(()=> {
-      if(user) {
-        setPosts(MY_POSTS)
-      }else{
-        setPosts(POSTS)
-      }
-   
-  }, [user])
+    if(user) {
+      setPosts(MY_POSTS)
+    }else{
+      setPosts(POSTS)
+    }
+    setHowMuchSkip(0);
+}, [user])
 
 
   useEffect(()=> {
@@ -120,7 +106,33 @@ const Posts: React.FC= () => {
   }, [location])
 
 
-  const {loading, error, data } = useQuery<Posts | MyPosts>(posts);
+  const {loading, error, data, fetchMore } = useQuery<Posts | MyPosts>(posts, {
+    variables: { first: 5, skip: 0 },
+  });
+
+
+  const loadMore = () => {
+    setHowMuchSkip(howMuchSkip+5)
+    console.log(howMuchSkip)
+    //@ts-ignore
+    fetchMore({variables: {skip: howMuchSkip+5}, updateQuery: (prev, { fetchMoreResult }) => {
+      if (!fetchMoreResult) return prev;
+      if('posts' in prev && 'posts' in fetchMoreResult){
+        return {
+          ...prev,
+          posts: [...prev.posts, ...fetchMoreResult.posts]
+        }
+      }else if('myPosts' in prev && 'myPosts' in fetchMoreResult) {
+        return {
+          ...prev,
+          posts: [...prev.myPosts, ...fetchMoreResult.myPosts]
+        }
+      }
+      
+    }
+  })
+    
+  }
  
   if (loading) return <div className="posts-container"><Loading /></div> ;
   if (error) return <p>Error :(</p>;
@@ -134,6 +146,7 @@ const Posts: React.FC= () => {
     {data && ('myPosts' in data) && data.myPosts.map(({title, id, body, author, published, updatedAt})=> (
       <Post updatedAt={updatedAt} published={published} user={true} body={body} title={title} author={author}  id={id} key={id}/>
     ))}
+    <div onClick={()=> loadMore() } className="posts-createPost">Fetch More<FontAwesomeIcon className="posts-arrow" icon={faAngleDown} color="#a99888" /></div>
     {openModal && <ModalCreatePost  show={openModal} toggleModal={(modal: boolean)=> setOpenModal(modal)} />}
   </div>)
 

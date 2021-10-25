@@ -1,0 +1,9 @@
+@import '_variables';
+
+.comments-container {
+  position: relative;
+  margin-top: 30px;
+  @include flex(column, flex-start, center);
+  height: 100%;
+  margin-bottom: 20px;
+}

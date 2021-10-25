@@ -1,5 +1,5 @@
 
-import './stylesheets/App.css';
+import './stylesheets/App.scss';
 import Posts from './components/Posts';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from './components/Header';
 import Sidebar from './components/SideBar';
 import SinglePost from './components/SinglePost';
+import LogoutPage from './components/LogoutPage';
+import MyComments from './components/MyComments';
+import SearchResults from './components/SearchResults';
 
 const App =()  =>{
 
@@ -22,6 +25,9 @@ const App =()  =>{
           <Route path="/register">
             <RegisterPage />
           </Route>
+          <Route path="/logoutpage">
+            <LogoutPage />
+          </Route>
           <Route path="/myposts">
             <div className="app-container">
               <Sidebar /> 
@@ -32,12 +38,32 @@ const App =()  =>{
               
             </div>
           </Route>
+          <Route path="/mycomments">
+          <div className="app-container">
+              <Sidebar /> 
+              <div className="app-body">
+                <Header />
+                <MyComments />
+              </div>
+              
+            </div>
+          </Route>
           <Route path="/post">
             <div className="app-container">
               <Sidebar /> 
               <div className="app-body">
                 <Header />
                 <SinglePost />
+              </div>
+              
+            </div>
+          </Route>
+          <Route path="/search/:fraze">
+            <div className="app-container">
+              <Sidebar /> 
+              <div className="app-body">
+                <Header />
+                <SearchResults />
               </div>
               
             </div>

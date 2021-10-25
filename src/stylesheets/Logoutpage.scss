@@ -1,0 +1,98 @@
+@import '_variables';
+
+.logout-container {
+  @include flex(row, center, center);
+  width: 100%;
+  height: 100vh;
+  background-color: $background-color-secondary;
+
+  .logout-window {
+    @include flex(column, center, center);
+    width: 500px;
+    height: 350px;
+    background-color: $background-color-secondary;
+    border: 2px solid $primary-color;
+    border-radius: 8px;
+    box-shadow: 10px 5px 5px $primary-color;
+  }
+}
+
+.logout-message {
+  font-size: size(xxlarge);
+  padding-bottom: 20px;
+  color: $primary-color;
+  font-weight: weight(bold);
+}
+
+.logout-inputs {
+  width: 75%;
+  font-size: size(large);
+  @include flex(column, center, flex-start);
+  padding-bottom: 4px;
+  color: $primary-color;
+  font-weight: weight(bold);
+
+  span {
+    @include flex(row, center, center);
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid $primary-color;
+    padding: 6px;
+  }
+
+  input {
+    font-size: size(large);
+    margin-left: 6px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: $background-color-secondary;
+  }
+
+  button {
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  p {
+    font-size: size(big);
+    color: $primary-color;
+    align-self: center;
+  }
+}
+
+.logout-buttons {
+  @include flex(column, center, center);
+
+  span {
+    font-size: size(medium);
+    color: $primary-color;
+    font-weight: weight(bold);
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  p {
+    font-size: size(big);
+    margin-bottom: 4px;
+    color: $primary-color;
+  }
+}
+
+.logout-button {
+  background-color: $primary-color;
+  color: $background-color-secondary;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: $background-color-secondary;
+    color: $primary-color;
+    border: 2px solid $primary-color;
+  }
+}

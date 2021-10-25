@@ -14,6 +14,38 @@ const UPDATE_POST = gql`
   }
 `;
 
+
+const POSTS = gql`
+    query {
+      posts {
+        id
+        title
+        body
+        published
+        author {
+          name
+        }
+        updatedAt
+      }
+    }
+  `
+
+
+  const MY_POSTS = gql`
+    query {
+      myPosts {
+        id
+        title
+        body
+        published
+        author {
+          name
+        }
+        updatedAt
+      }
+    }
+  `
+
 interface PostReturn {
   id: string;
   title: string;
@@ -41,7 +73,7 @@ const BackGround = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0,0,0, 0.8);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -146,6 +178,8 @@ const ModalUpdatePost:React.FC<ModalProps> = ({modalContent, show, toggleModal})
   const [newTitle, setNewTitle]=useState(title);
   const [newBody, setNewBody]=useState(body);
   const [newPublished, setNewPublished]= useState(published);
+  const [updateError, setUpdateError]= useState<Error | null>(null)
+
 
   const closeModal = () => {
     toggleModal(!showModal)
@@ -158,10 +192,11 @@ const ModalUpdatePost:React.FC<ModalProps> = ({modalContent, show, toggleModal})
 
   
   const [updatePost, { error, data }] = useMutation<
-    { deletePost: PostReturn },
+    { updatePost: PostReturn },
     { id: string; props: PostProps }
   >(UPDATE_POST, {
-    variables: { id, props: { title: newTitle, published: newPublished, body: newBody } }, // Variables are implementing interface of LOginData
+    variables: { id, props: { title: newTitle, published: newPublished, body: newBody } }, refetchQueries: [{query: POSTS} , {query: MY_POSTS} ], onError: (err) => {
+      setUpdateError(err); }
   });
 
   const CloseModalOnOutsideClick = (e: React.MouseEvent) => {

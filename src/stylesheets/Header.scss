@@ -1,0 +1,71 @@
+@import '_variables';
+
+.header {
+  height: 7vh;
+  padding: 20px 0;
+  top: 0;
+  width: 100%;
+  @include flex(row, space-between, center);
+  position: sticky;
+  z-index: 10;
+  border-bottom: 1px solid $primary-color;
+  background-image: url('https://webstatic-sea.mihoyo.com/upload/event/2021/09/24/f534b8060dac7b135df85c7df3c4b467_2591103253723835447.png');
+  background-color: transparent;
+
+  &-sign {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 40px;
+    color: $primary-color;
+    font-weight: bold;
+
+    &-button {
+      @include flex(row, center, center);
+      font-size: size(x-large);
+      margin: 0 15px;
+      border-radius: $border-radius-circular;
+      background-color: $background-color-secondary;
+      padding: 5px 10px;
+      border: 1px solid $primary-color;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      p {
+        margin-left: 5px;
+        color: #a99888;
+      }
+    }
+  }
+}
+
+.header-magnifyingGlass {
+  font-size: size(large);
+  margin-left: 10px;
+}
+
+.header-search {
+  min-width: 450px;
+  height: 4vh;
+  border-radius: 24px;
+  border: 1px solid $primary-color;
+  @include flex(row, center, center);
+  margin-left: 20px;
+
+  input {
+    outline: none;
+    font-size: size(large);
+    padding: 5px;
+    width: 100%;
+    border-radius: 24px;
+    border: none;
+    background-color: inherit;
+  }
+}
+
+.header-logo-search {
+  display: flex;
+  align-items: center;
+}

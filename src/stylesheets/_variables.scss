@@ -1,0 +1,53 @@
+$background-color: #f0ece5;
+$background-color-secondary: #e2dbd3;
+$primary-color: #a99888;
+$border-radius-circular: 30px;
+$font-weights: (
+  'regular': 400,
+  'medium': 500,
+  'bold': 800,
+);
+
+$font-sizes: (
+  'xsmall': 10px,
+  'small': 12px,
+  'medium': 14px,
+  'big': 16px,
+  'large': 18px,
+  'xlarge': 20px,
+  'xxlarge': 26px,
+);
+
+$border: 1px solid lightgray;
+$shade-of-white: #f7f7f7;
+
+$mobile: 667px;
+
+$ipad: 1024px;
+
+$laptop: 1440px;
+
+@function weight($weight-name) {
+  @return map-get($font-weights, $weight-name);
+}
+
+@function size($font-size-name) {
+  @return map-get($font-sizes, $font-size-name);
+}
+
+@mixin flex($direction, $justify-content, $align-items) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin transition-ease {
+  transition: all 0.8s ease-in-out;
+}
+
+@mixin mobile($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}

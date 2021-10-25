@@ -1,17 +1,7 @@
-/* .post-container {
-  background-color: #e2dbd3;
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.25);
-  margin-bottom: 20px;
-  margin-left: 25px;
-  margin-right: 25px;
-  font-size: large;
-} */
+@import '_variables';
 
 .comment-wrapper {
-  background-color: #f0ece5;
+  background-color: $background-color;
   display: flex;
   flex-direction: column;
   min-width: 1000px;
@@ -22,9 +12,6 @@
   font-size: large;
   margin-top: 30px;
   align-self: center;
-  min-width: 1000px;
-  max-width: 1000px;
-  min-height: 100px;
 }
 
 .comment-header {
@@ -33,11 +20,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #e2dbd3;
+  background-color: $background-color-secondary;
   font-size: 20px;
   padding: 5px;
-  color: #a99888;
-  font-weight: bold;
+  color: $primary-color;
+  font-weight: weight(bold);
 }
 
 .comment-header p {
@@ -48,7 +35,7 @@
   padding-left: 20px;
   display: flex;
   flex-direction: column;
-  background-color: #f0ece5;
+  background-color: $background-color;
   height: 100%;
 }
 

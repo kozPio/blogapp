@@ -1,4 +1,4 @@
-import "../stylesheets/RegisterPage.css";
+import "../stylesheets/RegisterPage.scss";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -84,7 +84,10 @@ interface ErrorProps {
   }
 
   const home = () => {
-    history.push('/');
+    history.push({
+      pathname: '/',
+      state: { user: false }
+    });
   }
 
 

@@ -1,10 +1,12 @@
+@import '_variables';
+
 .comment-container {
   margin-top: 30px;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-size: large;
+  font-size: size(large);
   margin-bottom: 20px;
   align-items: center;
 }
@@ -13,19 +15,18 @@
   width: 200px;
   height: 50px;
   display: flex;
-  border-radius: 30px;
+  border-radius: $border-radius-circular;
   align-items: center;
   justify-content: center;
-  align-items: center;
-  background-color: #e2dbd3;
+  background-color: $background-color-secondary;
   margin-bottom: 15px;
-  color: #a99888;
-  font-size: 16px !important;
+  color: $primary-color;
+  font-size: size(big) !important;
   font-weight: bold;
   cursor: pointer;
 }
 
 .comments-plus {
   margin-right: 5px;
-  font-size: medium;
+  font-size: size(medium);
 }

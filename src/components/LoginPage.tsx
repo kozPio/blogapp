@@ -1,4 +1,4 @@
-import "../stylesheets/LoginPage.css";
+import "../stylesheets/LoginPage.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from "react-router-dom";
@@ -75,7 +75,6 @@ interface ErrorProps {
   });
 
   useEffect(()=> {
-    console.log(data)
     if(data){
         localStorage.setItem("token", data.login.token)
         history.push('/')

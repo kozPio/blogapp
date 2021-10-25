@@ -1,24 +1,21 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useMutation, gql } from '@apollo/client';
-import { MdClose } from 'react-icons/md';
+import {MdClose} from 'react-icons/md';
 
 
-const CREATE_COMMENT = gql`
-  mutation ( $props: CreateCommentInput!) {
-    createComment(data: $props) {
+const UPDATE_COMMENT = gql`
+  mutation ($id: ID!, $props: UpdateCommentInput!) {
+    updateComment(id: $id, data: $props) {
       id
       text
-      author {
-        name
-      }
     }
   }
 `;
 
 
 const COMMENTS = gql`
-    query {
+    query{
       comments{
         id
         text
@@ -31,47 +28,22 @@ const COMMENTS = gql`
     }
   `;
 
-
-const POST = gql`
-    query($id: ID!) {
-      post(id: $id) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-        comments {
-          id
-          updatedAt
-          text
-          author {
-            name
-          }
-        }
-    }
-  }
-  `
-
 interface CommentReturn {
   id: string;
-  text: string;
-  author: {
-    name: string
-  }
+  text: string
 }
 
 interface CommentProps {
-  text: string;
-  post: string;
+  text: string
 }
 
 interface ModalProps {
+  modalContent: {
+    id: string;
+    text: string
+  }
   show: boolean;
   toggleModal: any;
-  id: string;
 }
 
 const BackGround = styled.div`
@@ -87,7 +59,7 @@ const BackGround = styled.div`
 
   const ModalWrapper = styled.div`
   width: 800px;
-  height: 500px;
+  height: 300px;
   box-shadow: 0 5px 16px rgba(0,0,0, 0.2);
   background: #fff;
   color: #000;
@@ -116,39 +88,41 @@ const ModalContent = styled.div`
     font-size 22px;
   }
 
-  .comment-create-text{
+  input{
+    width: 90%;
+    font-size: 18px;
+    margin-bottom: 10px;
+    background-color: #f0ece5;
+  }
+  .post-body{
     width: 90%;
     height: 50%;
     font-size: 18px;
     display: flex;
     flex-wrap: wrap;
-    background: #f0ece5;
     resize: none;
   }
 
-  
-  .comment-create-footer{
-    margin-top: 20px;
+  .post-checkbox{
     display: flex;
-    width: 90%;
-    justify-content: flex-end;
   }
 
-  .comment-error-message {
-    font-size: 16px;
-    color: #FFA500;
-    margin-right: 10px;
+  .post-checkbox input {
+    margin-top: 8px;
+    width: 15px;
+    height: 15px;
+    margin-left: 15px;
   }
 
   button {
-    font-size 14px;
-    padding: 10px;
+    padding: 10px 24px;
     background: #f0ece5;
     color: #a99888;
     border: 1px solid #a99888;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    align-self: flex-end;
+    margin-right: 15px;
   }
 
   button:hover {
@@ -158,10 +132,9 @@ const ModalContent = styled.div`
 `;
 
 
-
 const CloseModalButton = styled(MdClose)`
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   width: 32px;
@@ -173,36 +146,32 @@ const CloseModalButton = styled(MdClose)`
 
 
 
-const ModalCreateComment:React.FC<ModalProps> = ({ id, show, toggleModal}) => {
+const ModalUpdateComment:React.FC<ModalProps> = ({modalContent, show, toggleModal}) => {
 
   const [showModal, setShowModal]= useState<boolean>(show);
   const modalRef = useRef();
+  const {id, text} = modalContent;
 
-  const [newText, setNewText]=useState('');
-  const [errorInput, seterrorInput]=useState<string | null>(null);
-  const [CreateError, setCreateError]=useState<Error | null>(null);
+  const [newText, setNewText]=useState(text);
+  const [updateError, setUpdateError]= useState<Error | null>(null)
+
 
   const closeModal = () => {
     toggleModal(!showModal)
   }
 
-  const createAndClose =() => {
-    if(newText.length >=5)
-      {
-        createComment();
-        closeModal();
-      } else{
-        seterrorInput('Plese make sure your text has at least 5 charachters')
-      }   
+  const updateAndClose =() => {
+    updateComment();
+    closeModal();
   }
 
   
-  const [createComment, { error, data }] = useMutation<
-    { createComment: CommentReturn },
-    { props: CommentProps }
-  >(CREATE_COMMENT, {
-    variables: {  props: { text: newText, post: id } }, onError: (err) => {
-      setCreateError(err)}, refetchQueries: [{query: POST, variables: {id}}, {query: COMMENTS}]
+  const [updateComment, { error, data }] = useMutation<
+    { updateComment: CommentReturn },
+    { id: string; props: CommentProps }
+  >(UPDATE_COMMENT, {
+    variables: { id, props: { text: newText} }, refetchQueries: [{query: COMMENTS} ], onError: (err) => {
+      setUpdateError(err); }
   });
 
   const CloseModalOnOutsideClick = (e: React.MouseEvent) => {
@@ -211,20 +180,14 @@ const ModalCreateComment:React.FC<ModalProps> = ({ id, show, toggleModal}) => {
     }
   }
 
-  if (error) return <p> {error.message}</p>;
-
   return  (
     <BackGround ref={modalRef as any} onClick={CloseModalOnOutsideClick}>
       <ModalWrapper>
         <ModalContent>
-          <p>Add your comment</p>
-          <label htmlFor="text">Comment text</label>
-          <textarea className="comment-create-text" value={newText} onChange={(e)=> setNewText(e.target.value)}  name="text" />
-           
-          <div className="comment-create-footer">
-            {errorInput && <p className="comment-error-message">{errorInput}</p>}
-            <button onClick={()=> createAndClose()}>Create Comment</button>
-          </div>
+          <p>Update your Comment</p>
+          <label htmlFor="body">Comment text</label>
+          <textarea className="post-body" value={newText} onChange={(e)=> setNewText(e.target.value)}  name="body" />
+          <button onClick={()=> updateAndClose()}>Update Comment</button>
         </ModalContent>
         <CloseModalButton aria-label='Close modal' onClick={()=> closeModal()}/>
       </ModalWrapper>
@@ -234,4 +197,4 @@ const ModalCreateComment:React.FC<ModalProps> = ({ id, show, toggleModal}) => {
 }
 
 
-export default ModalCreateComment;
+export default ModalUpdateComment;

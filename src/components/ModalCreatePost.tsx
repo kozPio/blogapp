@@ -14,6 +14,38 @@ const CREATE_POST = gql`
   }
 `;
 
+
+const POSTS = gql`
+    query {
+      posts {
+        id
+        title
+        body
+        published
+        author {
+          name
+        }
+        updatedAt
+      }
+    }
+  `
+
+
+  const MY_POSTS = gql`
+    query {
+      myPosts {
+        id
+        title
+        body
+        published
+        author {
+          name
+        }
+        updatedAt
+      }
+    }
+  `
+
 interface PostReturn {
   id: string;
   title: string;
@@ -155,6 +187,7 @@ const ModalCreatePost:React.FC<ModalProps> = ({ show, toggleModal}) => {
   const [newBody, setNewBody]=useState('');
   const [newPublished, setNewPublished]= useState(false);
   const [errorLength, setErrorLength]=useState<string | null>(null);
+  const [createError, setCreateError]= useState<Error | null>(null)
 
   const closeModal = () => {
     toggleModal(!showModal)
@@ -175,7 +208,9 @@ const ModalCreatePost:React.FC<ModalProps> = ({ show, toggleModal}) => {
     { createPost: PostReturn },
     { props: PostProps }
   >(CREATE_POST, {
-    variables: {  props: { title: newTitle, published: newPublished, body: newBody } }, // Variables are implementing interface of LOginData
+    variables: {  props: { title: newTitle, published: newPublished, body: newBody } }, refetchQueries: [{query: POSTS} , {query: MY_POSTS} ], onError: (err) => {
+      setCreateError(err);
+  } 
   });
 
   const CloseModalOnOutsideClick = (e: React.MouseEvent) => {

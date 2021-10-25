@@ -1,4 +1,4 @@
-import '../stylesheets/Sidebar.css';
+import '../stylesheets/Sidebar.scss';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -46,8 +46,11 @@ const Sidebar: React.FC = () => {
           }}>
             <p className="sidebar-show">Menage your posts</p>
           </Link>
-          
-          <p className="sidebar-show">Manage your comments</p>
+          <Link to={{
+            pathname: "/mycomments"
+          }}>
+            <p className="sidebar-show">Manage your comments</p>
+          </Link>
         </div>}
         
       

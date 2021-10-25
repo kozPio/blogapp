@@ -1,0 +1,52 @@
+@import '_variables';
+
+.sidebar {
+  height: 100vh;
+  background-image: url('https://webstatic-sea.mihoyo.com/upload/event/2021/09/24/a68116a9450eddda7cbd975eac645862_9052321077943725352.png');
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  z-index: 16;
+
+  .sidebar-option {
+    padding: 10px;
+    font-size: size(xlarge);
+    color: $primary-color;
+    font-weight: weight(bold);
+    border-radius: $border-radius-circular;
+    margin: 15px 15px 15px 10px;
+    cursor: pointer;
+
+    &:hover {
+      outline: 1px solid $primary-color;
+    }
+  }
+}
+
+.sidebar-reveal {
+  @include flex(row, flex-start, center);
+}
+
+.sidebar-logo {
+  object-fit: contain;
+  height: 7vh;
+  width: 90%;
+  filter: sepia(0.8);
+  border-radius: 33px;
+  margin-left: 10px;
+}
+
+.sidebar-show {
+  padding: 10px;
+  font-size: 18px;
+  color: $primary-color;
+  font-weight: weight(bold);
+  border-radius: $border-radius-circular;
+  margin: 0 15px 15px 10px;
+  cursor: pointer;
+
+  &:hover {
+    outline: 1px solid $primary-color;
+  }
+}

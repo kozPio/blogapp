@@ -1,4 +1,4 @@
-import '../stylesheets/Post.css'
+import '../stylesheets/Post.scss'
 import CommentBox from './CommentBox';
 import {useQuery, gql} from "@apollo/client";
 import { useEffect, useState } from 'react';

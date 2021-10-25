@@ -1,5 +1,4 @@
-import '../stylesheets/Post.css'
-import CommentBox from './CommentBox';
+import '../stylesheets/Post.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX , faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {useMutation, gql} from "@apollo/client";
@@ -8,6 +7,7 @@ import ModalUpdatePost from './ModalUpdatePost';
 import { Link } from 'react-router-dom';
 import truncate from '../utils/turncate';
 import convertDate from '../utils/convertDate';
+import NotificationModal from './NotificationModal';
 
 
 interface PostProps {
@@ -40,7 +40,39 @@ deletePost(
   id
 }
 }
-`
+`;
+
+
+const POSTS = gql`
+    query {
+      posts {
+        id
+        title
+        body
+        published
+        author {
+          name
+        }
+        updatedAt
+      }
+    }
+  `;
+
+
+  const MY_POSTS = gql`
+    query {
+      myPosts {
+        id
+        title
+        body
+        published
+        author {
+          name
+        }
+        updatedAt
+      }
+    }
+  `;
 
 interface PostId {
   id: string;
@@ -55,7 +87,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
 
   const [openModal, setOpenModal]= useState(false);
   const [modalContent, setModalContent]=useState<ModalProps>({id, title, body, published});
-
+  const [deleteError, setDeleteError]= useState<Error | null>(null)
 
   const toggleModdal = () => {
     setOpenModal(!openModal)
@@ -65,7 +97,9 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
     { deletePost: PostId }, // sets what is returned from this mutation what props can I access on data after mutation (if those props exist)
     { id: string } 
   >(DELETE_POST, {
-    variables: { id } // Variables are implementing interface of LOginData
+    variables: { id } , refetchQueries: [{query: POSTS} , {query: MY_POSTS} ], onError: (err) => {
+      setDeleteError(err);
+  } 
   });
 
 
@@ -93,7 +127,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
       
     </div>
     {openModal && <ModalUpdatePost modalContent={modalContent} show={openModal} toggleModal={(modal: boolean)=> setOpenModal(modal)} />}
-    {/* <CommentBox /> */}
+    {deleteError && <NotificationModal modalContent={deleteError.message} toggleModal={(err: Error | null)=> setDeleteError(err)}/>}
   </div>
 
 }

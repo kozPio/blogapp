@@ -1,0 +1,40 @@
+@import '_variables';
+
+.posts-container {
+  position: relative;
+  margin-top: 30px;
+  @include flex(column, flex-start, center);
+  height: 100%;
+}
+
+.posts-createPost {
+  width: 125px;
+  padding: 10px;
+  @include flex(row, center, center);
+  border-radius: 30px;
+  background-color: $background-color-secondary;
+  margin-bottom: 15px;
+  color: $primary-color;
+  font-weight: weight(bold);
+  cursor: pointer;
+
+  &:hover {
+    color: $background-color-secondary;
+    background-color: $primary-color;
+    outline: 1px solid $primary-color;
+  }
+}
+
+.posts-createPost:hover .posts-plus {
+  color: $background-color-secondary;
+}
+
+.posts-plus {
+  margin-right: 5px;
+  font-size: size(medium);
+}
+
+.posts-arrow {
+  margin-left: 6px;
+  font-size: size(medium);
+}

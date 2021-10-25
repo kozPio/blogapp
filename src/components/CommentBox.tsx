@@ -1,4 +1,4 @@
-import '../stylesheets/CommentsBox.css';
+import '../stylesheets/CommentsBox.scss';
 import { useState } from "react";
 import  Comment  from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +39,7 @@ const CommentBox:React.FC<CommentProps> = ({comments, postId})=> {
   return (<div className="comment-container">
     <div onClick={() => toggleModdal()} className="comments-createComment"><FontAwesomeIcon className="comments-plus" icon={faPlus} color="#a99888" />Add new comment</div>
     {comments && comments.map(comment => (
-      <Comment text={comment.text} author={comment.author} updatedAt={comment.updatedAt} key={comment.id} />
+      <Comment user={false} text={comment.text} author={comment.author} updatedAt={comment.updatedAt} key={comment.id} id={comment.id} />
     ))}
     {openModal && <ModalCreateComment id={postId}  show={openModal} toggleModal={(modal: boolean)=> setOpenModal(modal)} />}
     {notLoggedInError && <NotificationModal modalContent={notLoggedInError.message} toggleModal={(err: Error | null)=> setNotLoggedInError(err)}/>}
