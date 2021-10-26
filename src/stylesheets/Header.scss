@@ -12,22 +12,53 @@
   background-image: url('https://webstatic-sea.mihoyo.com/upload/event/2021/09/24/f534b8060dac7b135df85c7df3c4b467_2591103253723835447.png');
   background-color: transparent;
 
+  @include responsive($mobile) {
+    @include flex(row, space-between, flex-start);
+    height: 9vh;
+  }
+
   &-sign {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     margin-right: 40px;
     color: $primary-color;
     font-weight: bold;
 
+    @include responsive($ipad) {
+      margin-right: 20px;
+    }
+
     &-button {
       @include flex(row, center, center);
       font-size: size(x-large);
-      margin: 0 15px;
+      margin: 0 5px;
       border-radius: $border-radius-circular;
       background-color: $background-color-secondary;
       padding: 5px 10px;
       border: 1px solid $primary-color;
       cursor: pointer;
+
+      @include responsive($mobile) {
+        font-size: size(small);
+        padding: 2px 5px;
+      }
+
+      &-marg {
+        @include flex(row, center, center);
+        color: $primary-color;
+        font-size: size(x-large);
+        margin: 0 5px 5px 5px;
+        border-radius: $border-radius-circular;
+        background-color: $background-color-secondary;
+        padding: 5px 10px;
+        border: 1px solid $primary-color;
+        cursor: pointer;
+
+        @include responsive($mobile) {
+          font-size: size(small);
+          padding: 2px 5px;
+        }
+      }
 
       &:hover {
         text-decoration: underline;
@@ -41,18 +72,51 @@
   }
 }
 
+.header-hamburger {
+  display: none;
+
+  @include responsive($mobile) {
+    @include flex(column, center, center);
+    width: 80px;
+    margin: 0 5px;
+    font-size: size(small);
+    height: 25px;
+    border: 1px solid $primary-color;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: $background-color-secondary;
+  }
+
+  &-reveal {
+    height: 100%;
+  }
+
+  &-button {
+    margin-top: 5px;
+    padding: 2px 5px;
+    border-radius: $border-radius-circular;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 .header-magnifyingGlass {
   font-size: size(large);
   margin-left: 10px;
 }
 
 .header-search {
-  min-width: 450px;
+  width: 450px;
   height: 4vh;
   border-radius: 24px;
   border: 1px solid $primary-color;
   @include flex(row, center, center);
   margin-left: 20px;
+
+  @include responsive($mobile) {
+    width: 200px;
+  }
 
   input {
     outline: none;
@@ -62,10 +126,65 @@
     border-radius: 24px;
     border: none;
     background-color: inherit;
+
+    @include responsive($mobile) {
+      font-size: size(small);
+    }
   }
 }
 
 .header-logo-search {
   display: flex;
   align-items: center;
+}
+
+.sidebar-mobile {
+  display: none;
+
+  @include responsive($mobile) {
+    position: relative;
+    height: 100%;
+    // background-image: url('https://webstatic-sea.mihoyo.com/upload/event/2021/09/24/a68116a9450eddda7cbd975eac645862_9052321077943725352.png');
+    background-color: transparent;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 75px;
+    z-index: 10;
+  }
+
+  .sidebar-option-mobile {
+    padding: 5px 8px;
+    font-size: size(small);
+    color: $primary-color;
+    font-weight: weight(bold);
+    border-radius: 12px;
+    cursor: pointer;
+
+    &:hover {
+      outline: 1px solid $primary-color;
+    }
+  }
+}
+
+.sidebar-reveal-mobile {
+  @include flex(row, flex-start, center);
+
+  p {
+    margin-right: 4px;
+  }
+}
+
+.sidebar-show-mobile {
+  padding: 8px;
+  color: $primary-color;
+  font-weight: weight(bold);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: size(small);
+  text-align: center;
+
+  &:hover {
+    outline: 1px solid $primary-color;
+  }
 }

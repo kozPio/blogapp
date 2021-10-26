@@ -9,6 +9,14 @@
   width: 250px;
   z-index: 16;
 
+  @include responsive($ipad) {
+    width: 150px;
+  }
+
+  @include responsive($mobile) {
+    display: none;
+  }
+
   .sidebar-option {
     padding: 10px;
     font-size: size(xlarge);
@@ -17,6 +25,11 @@
     border-radius: $border-radius-circular;
     margin: 15px 15px 15px 10px;
     cursor: pointer;
+
+    @include responsive($ipad) {
+      padding: 5px;
+      font-size: size(medium);
+    }
 
     &:hover {
       outline: 1px solid $primary-color;
@@ -34,7 +47,11 @@
   width: 90%;
   filter: sepia(0.8);
   border-radius: 33px;
-  margin-left: 10px;
+  margin: 0 10px;
+
+  @include responsive($ipad) {
+    margin: 0 5px;
+  }
 }
 
 .sidebar-show {
@@ -45,6 +62,11 @@
   border-radius: $border-radius-circular;
   margin: 0 15px 15px 10px;
   cursor: pointer;
+
+  @include responsive($ipad) {
+    padding: 5px;
+    font-size: size(medium);
+  }
 
   &:hover {
     outline: 1px solid $primary-color;

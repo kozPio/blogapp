@@ -21,9 +21,9 @@ $font-sizes: (
 $border: 1px solid lightgray;
 $shade-of-white: #f7f7f7;
 
-$mobile: 667px;
+$mobile: 860px;
 
-$ipad: 1024px;
+$ipad: 1140px;
 
 $laptop: 1440px;
 
@@ -46,8 +46,14 @@ $laptop: 1440px;
   transition: all 0.8s ease-in-out;
 }
 
-@mixin mobile($size) {
+@mixin responsive($size) {
   @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin responsiveHeader($size) {
+  @media (min-width: $size) {
     @content;
   }
 }

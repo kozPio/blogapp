@@ -18,6 +18,11 @@
   font-weight: weight(bold);
   cursor: pointer;
 
+  @include responsive($ipad) {
+    padding: 5px;
+    font-size: small;
+  }
+
   &:hover {
     color: $background-color-secondary;
     background-color: $primary-color;

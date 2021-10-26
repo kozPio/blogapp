@@ -15,11 +15,19 @@
     @include flex(column, center, center);
     box-shadow: 10px 5px 5px $primary-color;
 
+    @include responsive($mobile) {
+      width: 350px;
+    }
+
     p {
       font-size: size(xxlarge);
       padding-bottom: 20px;
       color: $primary-color;
       font-weight: weight(bold);
+
+      @include responsive($mobile) {
+        font-size: size(large);
+      }
     }
   }
 }
@@ -32,6 +40,11 @@
   padding-bottom: 20px;
   color: $primary-color;
   font-weight: weight(bold);
+
+  @include responsive($mobile) {
+    font-size: size(medium);
+    padding-bottom: 10px;
+  }
 
   span {
     @include flex(row, center, center);
@@ -50,6 +63,10 @@
     border: none;
     outline: none;
     background-color: $background-color-secondary;
+
+    @include responsive($mobile) {
+      font-size: size(medium);
+    }
   }
 
   button {

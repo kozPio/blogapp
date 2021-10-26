@@ -4,6 +4,9 @@ import {useQuery, gql} from "@apollo/client";
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import convertDate from '../utils/convertDate';
+import Loading from '../utils/Loading';
+import {useParams} from 'react-router-dom';
+
 
 
 interface PostProps {
@@ -68,24 +71,25 @@ const SinglePost: React.FC = () => {
 
   const location = useLocation<LocationProps>();
   const [openModal, setOpenModal]= useState(false);
-  const [id, setId] = useState(location.state.id );
   const [postError, setPostError]=useState<Error | null>(null);
+  const {id}= useParams<{id?: string}>();
 
 
-
-
+ 
   
 
   const {loading, error, data } = useQuery<Post>(POST, {variables: {id}, onError: (err) => {
     setPostError(err)}});
 
 
+  if (loading) return <div className="single-post-window"><Loading /></div> ;
+  if (error) return <p>Error :(</p>;
   return <div className="single-post-window"><div className="single-post-container">
     {data && <div className="single-post-wrapper"><div className="post-header">
       <p>{data.post.author.name}</p>
       <p>{data.post.title}</p>
       <div className="post-edit">
-        <p>{convertDate(data.post.updatedAt)[0]} {convertDate(data.post.updatedAt)[1]}</p>
+        <p>{convertDate(data.post.updatedAt)}</p>
       </div>  
     </div>
     <div className="post-body">
@@ -105,3 +109,6 @@ const SinglePost: React.FC = () => {
 
 
 export default SinglePost;
+
+
+//here

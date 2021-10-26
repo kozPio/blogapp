@@ -16,8 +16,8 @@ const UPDATE_POST = gql`
 
 
 const POSTS = gql`
-    query {
-      posts {
+    query($first: Int $skip: Int $orderBy: PostOrderByInput) {
+      posts(first: $first skip: $skip orderBy: $orderBy) {
         id
         title
         body
@@ -32,8 +32,8 @@ const POSTS = gql`
 
 
   const MY_POSTS = gql`
-    query {
-      myPosts {
+    query($first: Int $skip: Int) {
+      myPosts (first: $first skip: $skip orderBy: updatedAt_DESC) {
         id
         title
         body
@@ -91,6 +91,10 @@ const BackGround = styled.div`
   grid-template-column: 1f 1f;
   z-index: 10;
   border-radius: 10px;
+
+  @media only screen and (max-width: 1250px) {
+    width: 600px
+  }
    `;
 
    
@@ -195,7 +199,7 @@ const ModalUpdatePost:React.FC<ModalProps> = ({modalContent, show, toggleModal})
     { updatePost: PostReturn },
     { id: string; props: PostProps }
   >(UPDATE_POST, {
-    variables: { id, props: { title: newTitle, published: newPublished, body: newBody } }, refetchQueries: [{query: POSTS} , {query: MY_POSTS} ], onError: (err) => {
+    variables: { id, props: { title: newTitle, published: newPublished, body: newBody } }, refetchQueries: [{query: POSTS, variables: { first: 5, skip: 0, orderBy: 'updatedAt_DESC'}} , {query: MY_POSTS, variables: { first: 5, skip: 0}} ], onError: (err) => {
       setUpdateError(err); }
   });
 

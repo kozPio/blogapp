@@ -3,8 +3,6 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
-import { useEffect, useState } from "react";
-import { useLocation } from 'react-router';
 import Post from './Post';
 import Loading from  '../utils/Loading';
 import { useParams } from 'react-router-dom';
@@ -50,15 +48,13 @@ interface LocationProps {
 
 const SearchResults: React.FC= () => {
 
-  const location = useLocation<LocationProps>();
+  
   const {fraze} = useParams<{fraze?: string}>();
 
   const {loading, error, data} = useQuery<Posts>(POSTS_SEARCH, {
     variables: { query: fraze },
   });
 
-    
-  
  
   if (loading) return <div className="posts-container"><Loading /></div> ;
   if (error) return <div className="posts-container"> <p>No results found(</p></div>;

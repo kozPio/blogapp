@@ -103,7 +103,7 @@ const Comment:React.FC<CommentProps> = ({text, author, updatedAt, user, id, post
     <div className="comment-header">
       <p>{author.name}</p>
       <div className="comment-time">
-        <p>{convertDate(updatedAt)[0]} {convertDate(updatedAt)[1]}</p>
+        <p>{convertDate(updatedAt)}</p>
         {user ? <div className="post-edit-icons"> <FontAwesomeIcon onClick={()=> deleteComment()} icon={faX} color="#FF6666"/> <FontAwesomeIcon onClick={()=> toggleModdal()} icon={faPenToSquare} color="#ffff9f"/> </div>: null }
       </div>  
     </div>
@@ -115,4 +115,7 @@ const Comment:React.FC<CommentProps> = ({text, author, updatedAt, user, id, post
      </div>)
 }
 
-export default Comment
+export default Comment;
+
+
+//here

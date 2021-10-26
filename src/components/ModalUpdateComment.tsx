@@ -68,6 +68,10 @@ const BackGround = styled.div`
   grid-template-column: 1f 1f;
   z-index: 10;
   border-radius: 10px;
+
+  @media only screen and (max-width: 1250px) {
+    width: 600px
+  }
    `;
 
    
@@ -103,16 +107,6 @@ const ModalContent = styled.div`
     resize: none;
   }
 
-  .post-checkbox{
-    display: flex;
-  }
-
-  .post-checkbox input {
-    margin-top: 8px;
-    width: 15px;
-    height: 15px;
-    margin-left: 15px;
-  }
 
   button {
     padding: 10px 24px;
@@ -122,7 +116,7 @@ const ModalContent = styled.div`
     border-radius: 8px;
     cursor: pointer;
     align-self: flex-end;
-    margin-right: 15px;
+    margin: 15px;
   }
 
   button:hover {

@@ -31,9 +31,19 @@ const Sidebar: React.FC = () => {
           }}> 
         <div className="sidebar-option"><p>All Posts</p></div>
       </Link>
-    <div className="sidebar-option"><p>Hot Posts</p></div>
-    <div className="sidebar-option"><p>Old Posts</p></div>
-    <div className="sidebar-option"><p>Featured Posts</p></div>
+      <Link to={{
+            pathname: "/posts/latest",
+          }}>
+        <div className="sidebar-option"><p>Latest Post</p></div>
+      </Link>
+    <Link to={{
+            pathname: "/posts/old",
+            state: {
+              user:  false
+            }
+          }}>
+      <div className="sidebar-option"><p>Old Posts</p></div>
+    </Link>
     {token &&<div className="sidebar-option sidebar-reveal" onClick={()=> reveal()}>
       <p>Manage your uploads</p><FontAwesomeIcon icon={faArrowAltCircleDown} color="#a99888"/>
     </div>}

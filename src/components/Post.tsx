@@ -44,8 +44,8 @@ deletePost(
 
 
 const POSTS = gql`
-    query {
-      posts {
+    query($first: Int $skip: Int $orderBy: PostOrderByInput) {
+      posts(first: $first skip: $skip orderBy: $orderBy) {
         id
         title
         body
@@ -60,8 +60,8 @@ const POSTS = gql`
 
 
   const MY_POSTS = gql`
-    query {
-      myPosts {
+    query ($first: Int $skip: Int) {
+      myPosts (first: $first skip: $skip orderBy: updatedAt_DESC) {
         id
         title
         body
@@ -97,7 +97,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
     { deletePost: PostId }, // sets what is returned from this mutation what props can I access on data after mutation (if those props exist)
     { id: string } 
   >(DELETE_POST, {
-    variables: { id } , refetchQueries: [{query: POSTS} , {query: MY_POSTS} ], onError: (err) => {
+    variables: { id } , refetchQueries: [{query: POSTS, variables: { first: 5, skip: 0, orderBy: 'updatedAt_DESC'}} , {query: MY_POSTS, variables: { first: 5, skip: 0}} ], onError: (err) => {
       setDeleteError(err);
   } 
   });
@@ -108,7 +108,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
       <p>{author.name}</p>
       <p>{title}</p>
       <div className="post-edit">
-        <p>{convertDate(updatedAt)[0]} {convertDate(updatedAt)[1]}</p>
+        <p>{convertDate(updatedAt)}</p>
         {user ? <div className="post-edit-icons"> <FontAwesomeIcon onClick={()=> deletePost()} icon={faX} color="#FF6666"/> <FontAwesomeIcon onClick={()=> toggleModdal()} icon={faPenToSquare} color="#ffff9f"/> </div>: null }
       </div>
       
@@ -117,10 +117,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
     <div className="post-body">
       <p>{truncate(body)}</p>
       <Link className="post-body-read-more" to={{
-            pathname: "/post",
-            state: {
-              id
-            }
+            pathname: `/post/${id}`,
           }}>
         <button>read more</button>
       </Link>
@@ -134,3 +131,5 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
 
 
 export default Post;
+
+//here

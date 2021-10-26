@@ -96,6 +96,10 @@ const BackGround = styled.div`
   grid-template-column: 1f 1f;
   z-index: 10;
   border-radius: 10px;
+
+  @media only screen and (max-width: 1250px) {
+    width: 600px
+  }
    `;
 
    

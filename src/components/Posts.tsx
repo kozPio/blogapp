@@ -10,13 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import ModalCreatePost from './ModalCreatePost';
 import Loading from  '../utils/Loading';
+import { useParams } from 'react-router-dom';
 
 
 
 
 const POSTS = gql`
-    query($first: Int $skip: Int) {
-      posts(first: $first skip: $skip orderBy: updatedAt_DESC) {
+    query($first: Int $skip: Int $orderBy: PostOrderByInput) {
+      posts(first: $first skip: $skip orderBy: $orderBy) {
         id
         title
         body
@@ -79,7 +80,10 @@ const Posts: React.FC= () => {
   const [posts, setPosts]=useState(POSTS);
   const [user, setUser]=useState(location.state?.user || false)
   const [openModal, setOpenModal]= useState(false);
-  const [howMuchSkip, setHowMuchSkip]=useState(0)
+  const [howMuchSkip, setHowMuchSkip]=useState(0);
+  const {time} = useParams<{time?: string}>();
+  const [order, setOrder]=useState('updatedAt_DESC');
+  const [howMuchLoad, setHowMuchLoad]=useState(5);
 
 
   const toggleModdal = () => {
@@ -97,6 +101,25 @@ const Posts: React.FC= () => {
 }, [user])
 
 
+useEffect(()=> {
+  if(time === 'old' || time === 'latest') {
+    if(time === 'old'){
+      setOrder('updatedAt_ASC')
+      setHowMuchLoad(5)
+    }
+    if(time === 'latest'){
+      setOrder('updatedAt_DESC')
+      setHowMuchLoad(1)
+    }
+    
+  }else{
+    setOrder('updatedAt_DESC')
+    setHowMuchLoad(5)
+  }
+  setHowMuchSkip(0);
+}, [time])
+
+
   useEffect(()=> {
     if(location.state){
       setUser(location.state.user)
@@ -107,15 +130,21 @@ const Posts: React.FC= () => {
 
 
   const {loading, error, data, fetchMore } = useQuery<Posts | MyPosts>(posts, {
-    variables: { first: 5, skip: 0 },
+    variables: { first: howMuchLoad, skip: 0, orderBy: order},
   });
 
 
   const loadMore = () => {
-    setHowMuchSkip(howMuchSkip+5)
-    console.log(howMuchSkip)
+    let x = howMuchSkip;
+    if(time === 'latest'){
+      x+=1;
+      setHowMuchSkip(x)
+    }else {
+      x+=5;
+      setHowMuchSkip(x)
+    }
     //@ts-ignore
-    fetchMore({variables: {skip: howMuchSkip+5}, updateQuery: (prev, { fetchMoreResult }) => {
+    fetchMore({variables: {skip: x}, updateQuery: (prev, { fetchMoreResult }) => {
       if (!fetchMoreResult) return prev;
       if('posts' in prev && 'posts' in fetchMoreResult){
         return {

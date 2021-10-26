@@ -9,6 +9,10 @@
   font-size: size(large);
   margin-bottom: 20px;
   align-items: center;
+
+  @include responsive($mobile) {
+    font-size: size(medium);
+  }
 }
 
 .comments-createComment {
@@ -24,9 +28,19 @@
   font-size: size(big) !important;
   font-weight: bold;
   cursor: pointer;
+
+  @include responsive($mobile) {
+    width: 100px;
+    height: 40px;
+    font-size: size(medium) !important;
+  }
 }
 
 .comments-plus {
   margin-right: 5px;
   font-size: size(medium);
+  @include responsive($mobile) {
+    margin-left: 5px;
+    font-size: size(small);
+  }
 }

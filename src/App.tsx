@@ -38,6 +38,16 @@ const App =()  =>{
               
             </div>
           </Route>
+          <Route path="/posts/:time">
+            <div className="app-container">
+              <Sidebar /> 
+              <div className="app-body">
+                <Header />
+                <Posts />
+              </div>
+              
+            </div>
+          </Route>
           <Route path="/mycomments">
           <div className="app-container">
               <Sidebar /> 
@@ -48,7 +58,7 @@ const App =()  =>{
               
             </div>
           </Route>
-          <Route path="/post">
+          <Route path="/post/:id">
             <div className="app-container">
               <Sidebar /> 
               <div className="app-body">

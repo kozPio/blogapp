@@ -4,14 +4,21 @@
   background-color: $background-color;
   display: flex;
   flex-direction: column;
-  min-width: 1000px;
-  max-width: 1000px;
+  width: 900px;
   min-height: 100px;
   border-radius: 8px;
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.25);
   font-size: large;
   margin-top: 30px;
   align-self: center;
+
+  @include responsive($ipad) {
+    width: 700px;
+  }
+
+  @include responsive($mobile) {
+    width: 350px;
+  }
 }
 
 .comment-header {
@@ -21,10 +28,14 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: $background-color-secondary;
-  font-size: 20px;
+  font-size: size(large);
   padding: 5px;
   color: $primary-color;
   font-weight: weight(bold);
+
+  @include responsive($ipad) {
+    font-size: size(medium);
+  }
 }
 
 .comment-header p {
@@ -37,6 +48,14 @@
   flex-direction: column;
   background-color: $background-color;
   height: 100%;
+
+  @include responsive($ipad) {
+    font-size: size(medium);
+  }
+
+  @include responsive($mobile) {
+    font-size: size(small);
+  }
 }
 
 .comment-time {
