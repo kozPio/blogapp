@@ -1,5 +1,5 @@
 import '../stylesheets/Comment.scss'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import convertDate from "../utils/convertDate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX , faPenToSquare} from '@fortawesome/free-solid-svg-icons';
@@ -88,7 +88,7 @@ const Comment:React.FC<CommentProps> = ({text, author, updatedAt, user, id, post
   
 
 
-  const [deleteComment, { error, data }] = useMutation<
+  const [deleteComment] = useMutation<
     { deleteComment: CommentReturn }, 
     { id: string } 
   >(DELETE_COMMENT, {

@@ -26,10 +26,6 @@ interface LoginToken {
   token: string;
 }
 
-interface Log {
-  login: LoginToken;
-}
-
 
 interface LoginData {
   email: string;
@@ -46,7 +42,6 @@ interface ErrorProps {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [openModal, setOpenModal]= useState(false);
   const [loginError, setLoginError]=useState<Error | null>(null);
   const [inputErrors, setInputErrors] = useState<ErrorProps>({
     email: false,
@@ -65,7 +60,7 @@ interface ErrorProps {
 
   
 
-  const [login, { data,error}] = useMutation<
+  const [login, { data}] = useMutation<
     { login: LoginToken }, // sets what is returned from this mutation what props can I access on data after mutation (if those props exist)
     { data: LoginData } // Seting variable data to implement interface LoginData
   >(LOG_IN, {

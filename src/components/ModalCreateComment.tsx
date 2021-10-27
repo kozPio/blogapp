@@ -201,7 +201,7 @@ const ModalCreateComment:React.FC<ModalProps> = ({ id, show, toggleModal}) => {
   }
 
   
-  const [createComment, { error, data }] = useMutation<
+  const [createComment, { error}] = useMutation<
     { createComment: CommentReturn },
     { props: CommentProps }
   >(CREATE_COMMENT, {

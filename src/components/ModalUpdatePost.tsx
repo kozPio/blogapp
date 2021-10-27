@@ -195,7 +195,7 @@ const ModalUpdatePost:React.FC<ModalProps> = ({modalContent, show, toggleModal})
   }
 
   
-  const [updatePost, { error, data }] = useMutation<
+  const [updatePost] = useMutation<
     { updatePost: PostReturn },
     { id: string; props: PostProps }
   >(UPDATE_POST, {

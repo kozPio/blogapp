@@ -79,9 +79,7 @@ interface PostId {
 }
 
 
-interface ModuleProps {
-  [key: string]: string;
-}
+
 
 const Post: React.FC<PostProps> = ({title, body, author, id, user, published, updatedAt}) => {
 
@@ -93,7 +91,7 @@ const Post: React.FC<PostProps> = ({title, body, author, id, user, published, up
     setOpenModal(!openModal)
   }
 
-  const [deletePost, { error, data }] = useMutation<
+  const [deletePost] = useMutation<
     { deletePost: PostId }, // sets what is returned from this mutation what props can I access on data after mutation (if those props exist)
     { id: string } 
   >(DELETE_POST, {

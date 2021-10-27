@@ -160,7 +160,7 @@ const ModalUpdateComment:React.FC<ModalProps> = ({modalContent, show, toggleModa
   }
 
   
-  const [updateComment, { error, data }] = useMutation<
+  const [updateComment] = useMutation<
     { updateComment: CommentReturn },
     { id: string; props: CommentProps }
   >(UPDATE_COMMENT, {

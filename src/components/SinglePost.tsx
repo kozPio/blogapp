@@ -1,8 +1,7 @@
 import '../stylesheets/Post.scss'
 import CommentBox from './CommentBox';
 import {useQuery, gql} from "@apollo/client";
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useState } from 'react';
 import convertDate from '../utils/convertDate';
 import Loading from '../utils/Loading';
 import {useParams} from 'react-router-dom';
@@ -59,18 +58,11 @@ const POST = gql`
   }
   `
 
-interface PostId {
-  id: string;
-}
 
-interface LocationProps {
-  id: string;
-}
 
 const SinglePost: React.FC = () => {
 
-  const location = useLocation<LocationProps>();
-  const [openModal, setOpenModal]= useState(false);
+  
   const [postError, setPostError]=useState<Error | null>(null);
   const {id}= useParams<{id?: string}>();
 

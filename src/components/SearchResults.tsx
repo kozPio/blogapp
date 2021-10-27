@@ -40,9 +40,6 @@ interface Posts {
   posts: PostProps[];
 }
 
-interface LocationProps {
-  search: string;
-}
 
 
 

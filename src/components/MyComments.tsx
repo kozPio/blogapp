@@ -51,13 +51,10 @@ interface Comments {
 const MyComments: React.FC= () => {
 
   
-  const [openModal, setOpenModal]= useState(false);
   const token = localStorage.getItem('token');
   const [comments, setComments ] = useState<CommentProps[]>([]);
 
-  const toggleModdal = () => {
-    setOpenModal(!openModal)
-  }
+ 
 
 
   const {loading, error, data } = useQuery<Comments>(COMMENTS);
@@ -73,7 +70,7 @@ const MyComments: React.FC= () => {
       setComments(commentsArray);  
     }
 
-  },[data])
+  },[data, token])
  
   if (loading) return <div className="comments-container"><Loading /></div> ;
   if (error) return <p>Error :(</p>;

@@ -59,7 +59,7 @@ interface PostProps {
   updatedAt: string
 }
 
-interface Posts {
+interface PostsProps {
   posts: PostProps[];
 }
 
@@ -129,7 +129,7 @@ useEffect(()=> {
   }, [location])
 
 
-  const {loading, error, data, fetchMore } = useQuery<Posts | MyPosts>(posts, {
+  const {loading, error, data, fetchMore } = useQuery<PostsProps | MyPosts>(posts, {
     variables: { first: howMuchLoad, skip: 0, orderBy: order},
   });
 
@@ -154,7 +154,7 @@ useEffect(()=> {
       }else if('myPosts' in prev && 'myPosts' in fetchMoreResult) {
         return {
           ...prev,
-          posts: [...prev.myPosts, ...fetchMoreResult.myPosts]
+          myPosts: [...prev.myPosts, ...fetchMoreResult.myPosts]
         }
       }
       

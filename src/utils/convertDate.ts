@@ -1,5 +1,4 @@
 const convertDate = (date: string) => {
-  //let dateArray = date.split('T');
   let convertedDate = new Date(date);
   let newDate = new Date();
   let final = newDate.getTime() - convertedDate.getTime();

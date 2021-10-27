@@ -209,7 +209,7 @@ const ModalCreatePost:React.FC<ModalProps> = ({ show, toggleModal}) => {
   }
 
   
-  const [createPost, { error, data }] = useMutation<
+  const [createPost, { error }] = useMutation<
     { createPost: PostReturn },
     { props: PostProps }
   >(CREATE_POST, {
