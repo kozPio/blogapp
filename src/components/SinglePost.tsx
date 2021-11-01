@@ -1,11 +1,11 @@
 import '../stylesheets/Post.scss'
 import CommentBox from './CommentBox';
-import {useQuery, gql} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import { useState } from 'react';
 import convertDate from '../utils/convertDate';
 import Loading from '../utils/Loading';
 import {useParams} from 'react-router-dom';
-
+import {POST} from '../gql';
 
 
 interface PostProps {
@@ -31,32 +31,6 @@ interface PostProps {
 interface Post {
   post: PostProps;
 }
-
-
-
-
-const POST = gql`
-    query($id: ID!) {
-      post(id: $id) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-        comments {
-          id
-          updatedAt
-          text
-          author {
-            name
-          }
-        }
-    }
-  }
-  `
 
 
 

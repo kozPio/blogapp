@@ -1,32 +1,15 @@
 import '../stylesheets/MyComments.scss'
 import {
-  useQuery,
-  gql
+  useQuery
 } from "@apollo/client";
 import { useEffect, useState } from "react";
 import Loading from  '../utils/Loading';
 import Comment from './Comment';
 import jwt from 'jsonwebtoken';
+import {COMMENTS} from '../gql';
 
 
 
-
-const COMMENTS = gql`
-    query{
-      comments {
-        id
-        text
-        author {
-          id
-          name
-        }
-        updatedAt
-        post {
-          id
-        }
-      }
-    }
-  `
 
 
 interface CommentProps {

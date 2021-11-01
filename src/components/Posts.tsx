@@ -1,7 +1,6 @@
 import '../stylesheets/Posts.scss'
 import {
-  useQuery,
-  gql
+  useQuery
 } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router';
@@ -11,41 +10,7 @@ import { faPlus, faAngleDown} from '@fortawesome/free-solid-svg-icons';
 import ModalCreatePost from './ModalCreatePost';
 import Loading from  '../utils/Loading';
 import { useParams } from 'react-router-dom';
-
-
-
-
-const POSTS = gql`
-    query($first: Int $skip: Int $orderBy: PostOrderByInput) {
-      posts(first: $first skip: $skip orderBy: $orderBy) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-      }
-    }
-  `
-
-
-  const MY_POSTS = gql`
-    query ($first: Int $skip: Int) {
-      myPosts(first: $first skip: $skip orderBy: updatedAt_DESC) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-      }
-    }
-  `
-
+import {POSTS, MY_POSTS} from '../gql';
 
 
 interface PostProps {

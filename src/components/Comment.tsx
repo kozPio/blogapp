@@ -3,59 +3,11 @@ import { useState } from "react";
 import convertDate from "../utils/convertDate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX , faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import {useMutation, gql} from "@apollo/client";
+import {useMutation} from "@apollo/client";
 import NotificationModal from './NotificationModal';
 import ModalUpdateComment from './ModalUpdateComment';
+import {POST, DELETE_COMMENT, COMMENTS} from  '../gql';
 
-
-const DELETE_COMMENT = gql`
-    mutation($id: ID!){
-      deleteComment(id: $id){
-        id
-      }
-    }
-  `;
-
-
-  const COMMENTS = gql`
-    query{
-      comments{
-        id
-        text
-        author {
-          id
-          name
-        }
-        updatedAt
-        post {
-          id
-        }
-      }
-    }
-  `;
-
-  const POST = gql`
-    query($id: ID!) {
-      post(id: $id) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-        comments {
-          id
-          updatedAt
-          text
-          author {
-            name
-          }
-        }
-    }
-  }
-  `
 
 
   interface CommentReturn {
@@ -117,5 +69,3 @@ const Comment:React.FC<CommentProps> = ({text, author, updatedAt, user, id, post
 
 export default Comment;
 
-
-//here

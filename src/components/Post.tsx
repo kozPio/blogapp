@@ -1,13 +1,14 @@
 import '../stylesheets/Post.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX , faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import {useMutation, gql} from "@apollo/client";
+import {useMutation} from "@apollo/client";
 import { useState } from 'react';
 import ModalUpdatePost from './ModalUpdatePost';
 import { Link } from 'react-router-dom';
 import truncate from '../utils/turncate';
 import convertDate from '../utils/convertDate';
 import NotificationModal from './NotificationModal';
+import {DELETE_POST, POSTS, MY_POSTS} from '../gql';
 
 
 interface PostProps {
@@ -31,48 +32,6 @@ interface ModalProps {
 }
 
 
-
-const DELETE_POST = gql`
-mutation($id: ID!) {
-deletePost(
-  id: $id
-) {
-  id
-}
-}
-`;
-
-
-const POSTS = gql`
-    query($first: Int $skip: Int $orderBy: PostOrderByInput) {
-      posts(first: $first skip: $skip orderBy: $orderBy) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-      }
-    }
-  `;
-
-
-  const MY_POSTS = gql`
-    query ($first: Int $skip: Int) {
-      myPosts (first: $first skip: $skip orderBy: updatedAt_DESC) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-      }
-    }
-  `;
 
 interface PostId {
   id: string;

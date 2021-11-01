@@ -1,59 +1,9 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { MdClose } from 'react-icons/md';
+import {CREATE_COMMENT, POST, COMMENTS} from '../gql';
 
-
-const CREATE_COMMENT = gql`
-  mutation ( $props: CreateCommentInput!) {
-    createComment(data: $props) {
-      id
-      text
-      author {
-        name
-      }
-    }
-  }
-`;
-
-
-const COMMENTS = gql`
-    query {
-      comments{
-        id
-        text
-        author {
-          id
-          name
-        }
-        updatedAt
-      }
-    }
-  `;
-
-
-const POST = gql`
-    query($id: ID!) {
-      post(id: $id) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-        comments {
-          id
-          updatedAt
-          text
-          author {
-            name
-          }
-        }
-    }
-  }
-  `
 
 interface CommentReturn {
   id: string;

@@ -1,29 +1,15 @@
 import '../stylesheets/Posts.scss'
 import {
-  useQuery,
-  gql
+  useQuery
 } from "@apollo/client";
 import Post from './Post';
 import Loading from  '../utils/Loading';
 import { useParams } from 'react-router-dom';
-
+import {POSTS_SEARCH} from '../gql';
 
 
   
-const POSTS_SEARCH = gql`
-  query($query: String ) {
-    posts(query: $query) {
-      id
-      title
-      body
-      published
-      author {
-        name
-      }
-      updatedAt
-  }
-}
-`;
+
 
 interface PostProps {
   title: string;

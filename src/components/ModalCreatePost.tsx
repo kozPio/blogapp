@@ -1,50 +1,10 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import {MdClose} from 'react-icons/md';
+import {CREATE_POST, POSTS, MY_POSTS} from '../gql';
 
 
-const CREATE_POST = gql`
-  mutation ( $props: CreatePostInput!) {
-    createPost(data: $props) {
-      id
-      title
-      published
-    }
-  }
-`;
-
-
-const POSTS = gql`
-    query($first: Int $skip: Int $orderBy: PostOrderByInput) {
-      posts(first: $first skip: $skip orderBy: $orderBy) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-      }
-    }
-  `
-
-
-  const MY_POSTS = gql`
-    query($first: Int $skip: Int) {
-      myPosts(first: $first skip: $skip orderBy: updatedAt_DESC) {
-        id
-        title
-        body
-        published
-        author {
-          name
-        }
-        updatedAt
-      }
-    }
-  `
 
 interface PostReturn {
   id: string;
